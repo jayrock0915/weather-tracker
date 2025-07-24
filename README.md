@@ -15,8 +15,9 @@ A simple Python CLI weather app that fetches live weather data using the [OpenWe
    ```bash
    git clone https://github.com/jayrock0915/weather-tracker.git
    cd weather-tracker
-2. **Install dependencies**
-streamlit
-requests
-python-dotenv
+2.2. **Install dependencies**
+
+```bash
+pip install -r requirements.txt
+
 

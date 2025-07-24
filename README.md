@@ -1,12 +1,25 @@
-# 🌤️ Weather Tracker
+# ⛅ Weather Tracker
 
-A simple Python weather app using the OpenWeatherMap API.
+A simple Python CLI weather app that fetches live weather data using the [OpenWeatherMap API](https://openweathermap.org/api).
 
-## Features
-- Fetches live weather data by city name
-- Displays temperature, condition, humidity, and wind speed
-- Uses `.env` to secure the API key
+## 🚀 Features
 
-## Setup
-1. Clone the repo
-2. Install dependencies:
+- 🔍 Fetches weather data by **city name**
+- 🌡 Displays **temperature**, **weather condition**, **humidity**, and **wind speed**
+- 🔐 Uses a `.env` file to securely manage the API key
+
+## 🛠️ Setup
+
+1. **Clone the repo**
+
+   ```bash
+   git clone https://github.com/jayrock0915/weather-tracker.git
+   cd weather-tracker
+2. **Install dependencies**
+
+```bash
+pip install -r requirements.txt
+
+requests
+python-dotenv
+

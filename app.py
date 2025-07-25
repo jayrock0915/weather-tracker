@@ -1,31 +1,29 @@
-import os
+import streamlit as st
 import requests
-from dotenv import load_dotenv
 
-# Load API key from .env
-load_dotenv()
-API_KEY = os.getenv("API_KEY")
+# Get the API key from Streamlit secrets
+api_key = st.secrets["API_KEY"]
 
-def get_weather(city):
-    base_url = "http://api.openweathermap.org/data/2.5/weather"
-    params = {
-        "q": city,
-        "appid": API_KEY,
-        "units": "metric"  # Use "imperial" for Fahrenheit
-    }
-    response = requests.get(base_url, params=params)
-    data = response.json()
+# Streamlit UI
+st.title("🌤️ Weather Tracker")
+city = st.text_input("Enter city name")
+
+if city:
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=imperial"
+    response = requests.get(url)
 
     if response.status_code == 200:
-        print(f"\nWeather in {data['name']}, {data['sys']['country']}:")
-        print(f"Temperature: {data['main']['temp']}°C")
-        print(f"Condition: {data['weather'][0]['description'].capitalize()}")
-        print(f"Humidity: {data['main']['humidity']}%")
-        print(f"Wind: {data['wind']['speed']} m/s\n")
-    else:
-        print(f"Error: {data.get('message', 'Something went wrong')}")
+        data = response.json()
+        weather = data["weather"][0]["description"]
+        temperature = data["main"]["temp"]
+        humidity = data["main"]["humidity"]
+        wind_speed = data["wind"]["speed"]
 
-# Example usage
-if __name__ == "__main__":
-    city = input("Enter a city name: ")
-    get_weather(city)
+        st.subheader(f"Weather in {city}")
+        st.write(f"**Condition:** {weather}")
+        st.write(f"**Temperature:** {temperature} °F")
+        st.write(f"**Humidity:** {humidity}%")
+        st.write(f"**Wind Speed:** {wind_speed} mph")
+    else:
+        st.error("City not found. Please enter a valid city name.")
+# Force update for Streamlit Cloud
